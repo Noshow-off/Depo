@@ -55,27 +55,27 @@ class Chat:
     def __init__(self, msg):
         self.chat_id = msg['chat']['id']
         self.user_input = msg['text']
-        self.user_input = self.user_input.replace('@TLMusicDownloader_bot', '')
+        self.user_input = self.user_input.replace('@NexusHelpingBot', '')
         self.user_name = msg['from']['first_name']
         self.message_id = msg['message_id']
 
         self.messages = {
-            'start':'🤖 Hello, '+ self.user_name +'!\n\n'
-                    '📩 Send me:\n\n'
-                    '"*/music* _song name_"  or\n'
-                    '"*/music* _musician name - song name_"\n\n'
-                    'to order some music. 🎶',
+            'start':'🤖 ʜᴇʟʟᴏ, '+ self.user_name +'!\n\n'
+                    '📩 sᴇɴᴅ ᴍᴇ:\n\n'
+                    '"*/music* _sᴏɴɢ ɴᴀᴍᴇ_"  or\n'
+                    '"*/music* _ᴍᴜsɪᴄɪᴀɴ ɴᴀᴍᴇ - sᴏɴɢ ɴᴀᴍᴇ_"\n\n'
+                    'ᴛᴏ ᴏʀᴅᴇʀ sᴏᴍᴇ ᴍᴜsɪᴄ. 🎶',
             
-            'spotify_input_error':"‼️ *Oops! The bot doesn't support Spotify links!*\n"
-                    'Try: "*/music* _song name_"\n'
-                    'or: "*/music* _musician name - song name_"',
+            'spotify_input_error':"‼️ *ᴏᴏᴘs! ᴛʜᴇ ʙᴏᴛ ᴅᴏᴇsɴ'ᴛ sᴜᴘᴘᴏʀᴛ sᴘᴏᴛɪғʏ ʟɪɴᴋ's!*\n"
+                    'Try: "*/music* _sᴏɴɢ ɴᴀᴍᴇ_"\n'
+                    'or: "*/music* _ᴍᴜsɪᴄɪᴀɴ ɴᴀᴍᴇ - sᴏɴɢ ɴᴀᴍᴇ_"',
 
-            'invalid_command':'‼️ *Oops! Invalid command!*\n'
-                    'Try: "*/music* _song name_"\n'
-                    'or: "*/music* _musician name - song name_"',
+            'invalid_command':'‼️ *ᴏᴏᴘs! ɪɴᴠᴀʟɪᴅ ᴄᴏᴍᴍᴀɴᴅ!*\n'
+                    'Try: "*/music* _sᴏɴɢ ɴᴀᴍᴇ_"\n'
+                    'or: "*/music* _ᴍᴜsɪᴄɪᴀɴ ɴᴀᴍᴇ - sᴏɴɢ ɴᴀᴍᴇ_"',
 
-            'too_long':'‼️ *Oops! Video too long to convert!*\n'
-                    'Order something 30 minutes or less.'
+            'too_long':'‼️ *ᴏᴏᴘs! ᴠɪᴅᴇᴏ ᴛᴏᴏ ʟᴏɴɢ ᴛᴏ ᴄᴏɴᴠᴇʀᴛ!*\n'
+                    'ᴏʀᴅᴇʀ sᴏᴍᴇᴛʜɪɴɢ 𝟹𝟶 ᴍɪɴᴜᴛᴇs ᴏʀ ʟᴇss.'
 
 
         }
@@ -105,18 +105,18 @@ class Chat:
         min_duration, split_count = Music.get_duration(self, result)
 
         if int(min_duration) < 30 and split_count < 3:
-            file_name = Music.get_title(self, result) +' - @TLMusicDownloader_bot '+str(randint(0,999999))+'.mp3'
+            file_name = Music.get_title(self, result) +' - @NexusHelpingBot '+str(randint(0,999999))+'.mp3'
             file_name = file_name.replace('"', '')
 
             self.send_message(f"🎵 {Music.get_title(self, result)}\n🔗 {Music.get_link(self, result)}")
-            downloading_message = self.send_message('⬇️ Downloading... \n_(this may take a while.)_')
+            downloading_message = self.send_message('⬇️ ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ... \n_(this may take a while.)_')
 
             Music.download_music(self, file_name, Music.get_link(self, result))
 
             try:
                 self.send_audio(file_name)
                 self.delete_message(downloading_message)
-                self.send_message('✅ Sucess!')
+                self.send_message('sᴜᴄᴇss!')
                 print ("\nSucess!\n")
             except:
                 print("\nError")
