@@ -6,6 +6,7 @@ from multiprocessing import Process
 from youtubesearchpython import VideosSearch
 from dotenv import load_dotenv
 from os.path import join, dirname
+import must_join
 
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
@@ -79,6 +80,10 @@ class Chat:
 
 
         }
+
+        # Must-join check: block the user until they join the required channel
+        if not must_join.check(bot, msg):
+            return
 
         self.check_input(self.user_input, msg)
 
